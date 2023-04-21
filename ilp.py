@@ -7,7 +7,7 @@ import numpy as np
 def gomory(filename):   
     A,b,c = takeinput
     
-    x_opt,table,flag = tableau(A,b,c)  
+    x_opt,table,flag,basis_list = tableau(A,b,c)  
     feasible = True
 
     if(flag == 1):
@@ -16,7 +16,7 @@ def gomory(filename):
     while(feasible and not(isInt(x_opt))):
         i = choice(x_opt)
         table = addcondition(table,i)
-        x_opt, flag = dualsimplex(table)
+        x_opt, flag = dualsimplex(table,len(c),basis_list)
         if(flag == 1):
             feasible = False
 
