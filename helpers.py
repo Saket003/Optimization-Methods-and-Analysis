@@ -9,7 +9,7 @@ def takeinput(filename):
     # Check input order
     #TODO
     b = np.zeros((m,1))
-    c = np.zeros((1,n))
+    c = np.zeros(n)
     A = np.zeros((m,n))
 
     return A,b,c
