@@ -49,8 +49,9 @@ def choice(x,val):
 
 def round6(x):
     for i in range(len(x)):
-        if(abs(x[i])<1e-5):
-            x[i] = 0
+        #if(abs(x[i] - round(x[i]))<1e-5):
+        #    x[i] = round(x[i])
+        #else:
         x[i] = round(x[i],10)
     return x
 

@@ -1,12 +1,10 @@
 from helpers import takeinput, choice, addcondition, frac, round6, convert
-from dual_simplex import dualsimplex
-from simplex_tableau import tableau
+from simplex_tableau import tableau, dualsimplex
 import math
 import numpy as np
 
 def gomory(filename):   
     A,b,c,initial_n,initial_m = takeinput(filename)     #Take Inputs as Ax<=b - Verified
-
     n = initial_n + initial_m   #Converts to Ax=b - Verified
     A,c = convert(A,n,c)
 
@@ -15,7 +13,6 @@ def gomory(filename):
     if(flag == 1):
         return None
     
-    
     x_opt = round6(x_opt)   #Verified
     a,b = table.shape
     for i in range(a):
@@ -23,8 +20,11 @@ def gomory(filename):
     
     feasible = True
     while(feasible):
-        if(np.all([abs(i - round(i))<1e-5 for i in x_opt])):    #TODO Verify
+        if(np.all([abs(i - round(i))<1e-5 for i in x_opt[0:initial_n]])):    #TODO Verify
             x = x_opt[0:initial_n]
+            for i in range(len(x)):
+                x[i] = round(x[i])
+            x = x.astype(int)
             x = x.tolist()
             return x
 
@@ -42,4 +42,6 @@ def gomory(filename):
             table[i,:] = round6(table[i,:])
         
 
-print(gomory("TC\TC1.txt"))
+print(gomory("TC\TC1.txt")) #[1,1]
+print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
+print(gomory("TC\TC3.txt")) #[0,2,0,0]
