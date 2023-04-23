@@ -4,7 +4,7 @@ def dualsimplex(table,n,basis_list):
     a,b = table.shape
     while(True):    
         x = table[1:a,0]
-        if(x>=0).all():
+        if np.all((x>=0)):
             x_opt = np.zeros(n)
 
             j = 1
@@ -21,7 +21,7 @@ def dualsimplex(table,n,basis_list):
         l += 1 #In original table
 
         v = table[l,1:b]
-        if (v>=0).all():
+        if np.all((v>=0)):
             flag = 1
             return None, 1
         
@@ -30,14 +30,14 @@ def dualsimplex(table,n,basis_list):
         for i in range(1,b):
             if(v[i-1]>=0):
                 continue
-            ratio = table[0,i]/abs(v[i-1])
+            ratio = table[0,i]*round(1/abs(v[i-1]),10)
             if(ratio<min_ratio):
                 min_ratio = ratio
                 j = i
 
         #Pivot is (l,j) in initial table
         basis_list[l-1] = j
-        table[l,:] = table[l,:]/table[l,j]
+        table[l,:] = table[l,:]*round(1/table[l,j],10)
         for i in range(a):
             if(i == l):
                 continue
@@ -45,6 +45,7 @@ def dualsimplex(table,n,basis_list):
 
         #print(table)
 
+'''
 basis_list = [4,5]
 n = 5
 A = np.array([[0.0,2.0,6.0,10.0,0.0,0.0],[2.0,-2.0,4.0,1.0,1.0,0.0],[-1.0,4.0,-2.0,-3.0,0.0,1.0]])
@@ -60,3 +61,4 @@ A = np.array([[0.0,1.0,1.0,0.0,0.0],[-2.0,-1.0,-2.0,1.0,0.0],[-1.0,-1.0,0.0,0.0,
 x_opt,flag = dualsimplex(A,n,basis_list)
 print(x_opt)
 #[1.  0.5 0.  0. ]
+'''
