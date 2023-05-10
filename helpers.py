@@ -1,5 +1,7 @@
 import numpy as np
 import math
+import fractions
+
 
 '''
 All Functions here are verified
@@ -42,9 +44,9 @@ def choice(x,val):
         if(frac(x[i])>max_frac):
             max_frac = frac(x[i])
             max_index = i+1
-    if(frac(val)>=max_frac):
-        max_frac = frac(val)
-        max_index = 0
+    # if(frac(val)>=max_frac):
+    #     max_frac = frac(val)
+    #     max_index = 0
     return max_index
 
 def round6(x):
@@ -52,7 +54,7 @@ def round6(x):
         #if(abs(x[i] - round(x[i]))<1e-5):
         #    x[i] = round(x[i])
         #else:
-        x[i] = round(x[i],10)
+        x[i] = round(x[i],6)
     return x
 
 def addcondition(table, index, basis_list):

@@ -2,6 +2,7 @@ from helpers import takeinput, choice, addcondition, frac, round6, convert
 from simplex_tableau import tableau, dualsimplex
 import math
 import numpy as np
+import fractions
 
 def gomory(filename):   
     A,b,c,initial_n,initial_m = takeinput(filename)     #Take Inputs as Ax<=b - Verified
@@ -27,7 +28,7 @@ def gomory(filename):
             x = x.astype(int)
             x = x.tolist()
             return x
-
+        x_opt = round6(x_opt)
         i = choice(x_opt,table[0,0])    #Verified
         table,basis_list = addcondition(table,i,basis_list)     #Verified
 
@@ -42,6 +43,7 @@ def gomory(filename):
             table[i,:] = round6(table[i,:])
         
 
-print(gomory("TC\TC1.txt")) #[1,1]
-print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
+# print(gomory("TC\TC1.txt")) #[1,1]
+# print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
 print(gomory("TC\TC3.txt")) #[0,2,0,0]
+# print(gomory("TC\TC4.txt")) #[4,4]

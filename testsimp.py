@@ -1,4 +1,6 @@
 import numpy as np
+import fractions
+
 
 def tableau(A,b,c):
     m,n = A.shape
@@ -57,9 +59,21 @@ def tableau(A,b,c):
         #STEP 5 - TODO Verify
         i = 0
         for var in basis_list:
-            if(var > n and np.all(abs(table[i+1,1:n+1])<=1e-8)):
-                table = np.delete(table,i+1,0)
-                basis_list = np.delete(basis_list,i)
+            if(var > n):
+                if (np.all(abs(table[i+1,1:n+1])<=1e-6)):
+                    table = np.delete(table,i+1,0)
+                    basis_list = np.delete(basis_list,i)
+                else:
+                    for it in range(1,n+1):
+                        if(table[i+1,it]!=0):
+                            buff = it
+                            break
+                    basis_list[i] = buff
+                    table[i+1,:] = table[i+1,:]/table[i+1,buff]
+                    for it in range(len(basis_list)):
+                        if(it!=i+1):
+                            table[it,:] = table[it,:] - table[i+1,buff]*table[it,:]
+                    i += 1
             else:
                 i += 1
 
@@ -68,7 +82,7 @@ def simplex_mod(table,n,basis_list):
     a, b = table.shape
     while(True):
         x = table[0,1:b]
-        if np.all((x>=0)):
+        if(x>=0).all():
             x_opt = np.zeros(n)
 
             l = 1
@@ -85,7 +99,7 @@ def simplex_mod(table,n,basis_list):
         j += 1 #In original table
 
         u = table[1:a,j]
-        if np.all((u<=0)):
+        if (u<=0).all():
             flag = 1
             return None, 1
         l = 0 #l in original table
