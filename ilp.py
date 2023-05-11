@@ -1,12 +1,12 @@
-from helpers import takeinput, choice, addcondition, frac, round6, convert
+from helpers import takeinput, choice, addcondition, frac, convert
 from simplex_tableau import tableau, dualsimplex, simplex_mod
 import math
 import numpy as np
-import fractions
+from fractions import Fraction
 
 def gomory(filename):   
-    A,b,c,initial_n,initial_m = takeinput(filename)     #Take Inputs as Ax<=b - Verified
-    n = initial_n + initial_m   #Converts to Ax=b - Verified
+    A,b,c,initial_n,initial_m = takeinput(filename)
+    n = initial_n + initial_m
     A,c = convert(A,n,c)
 
     #TODO Verify #Check initial table wrongish?
@@ -15,10 +15,7 @@ def gomory(filename):
     if(flag == 1):
         return None
     
-    x_opt = round6(x_opt)   #Verified
     a,b = table.shape
-    for i in range(a):
-        table[i,:] = round6(table[i,:])
     
     feasible = True
     while(feasible):
@@ -29,23 +26,23 @@ def gomory(filename):
             x = x.astype(int)
             x = x.tolist()
             return x
-        x_opt = round6(x_opt)
-        i = choice(x_opt,table[0,0])    #Verified
-        table,basis_list = addcondition(table,i,basis_list)     #Verified
+
+        i = choice(x_opt)
+        table,basis_list = addcondition(table,i,basis_list)
 
         n += 1
         x_opt, flag = dualsimplex(table,n,basis_list)   #TODO Verify
         if(flag == 1):
             return None
         
-        x_opt = round6(x_opt)   #Verified
+        #x_opt = round6(x_opt)   #Verified
         a,b = table.shape
-        for i in range(a):
-            table[i,:] = round6(table[i,:])
+        #for i in range(a):
+        #    table[i,:] = round6(table[i,:])
         
-
-# print(gomory("TC\TC1.txt")) #[1,1]
-# print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
-# print(gomory("TC\TC3.txt")) #[0,2,0,0]
-# print(gomory("TC\TC4.txt")) #[4,4]
-print(gomory("TC\TC5.txt")) #[4,4]
+print(gomory("TC\TC1.txt")) #[1,1]
+print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
+print(gomory("TC\TC3.txt")) #[0,2,0,0]
+print(gomory("TC\TC4.txt")) #[4,4]
+print(gomory("TC\TC5.txt")) #[5,0]
+# print(gomory("TC\TC6.txt")) #[]

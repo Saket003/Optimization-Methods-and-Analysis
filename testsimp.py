@@ -103,7 +103,7 @@ def simplex_mod(table,n,basis_list):
             flag = 1
             return None, 1
         l = 0 #l in original table
-        min_ratio = float("inf")
+        min_ratio = int("inf")
         for i in range(1,a):
             if(u[i-1]<=0):
                 continue
@@ -148,7 +148,7 @@ def dualsimplex(table,n,basis_list):
             return None, 1
         
         j = 0 #j in original table
-        min_ratio = float("inf")
+        min_ratio = int("inf")
         for i in range(1,b):
             if(v[i-1]>=0):
                 continue
