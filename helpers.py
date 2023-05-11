@@ -51,10 +51,10 @@ def choice(x,val):
 
 def round6(x):
     for i in range(len(x)):
-        #if(abs(x[i] - round(x[i]))<1e-5):
-        #    x[i] = round(x[i])
-        #else:
-        x[i] = round(x[i],6)
+        if(abs(x[i] - round(x[i]))<1e-5):
+            x[i] = round(x[i])
+        else:
+            x[i] = round(x[i],10)
     return x
 
 def addcondition(table, index, basis_list):

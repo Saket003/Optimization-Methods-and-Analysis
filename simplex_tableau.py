@@ -1,4 +1,5 @@
 import numpy as np
+from helpers import round6
 
 def tableau(A,b,c):
     m,n = A.shape
@@ -68,6 +69,7 @@ def simplex_mod(table,n,basis_list):
     a, b = table.shape
     while(True):
         x = table[0,1:b]
+        x = round6(x)
         if np.all((x>=0)):
             x_opt = np.zeros(n)
 
@@ -85,6 +87,7 @@ def simplex_mod(table,n,basis_list):
         j += 1 #In original table
 
         u = table[1:a,j]
+        u = round6(u)
         if np.all((u<=0)):
             flag = 1
             return None, 1
@@ -112,6 +115,7 @@ def dualsimplex(table,n,basis_list):
     a,b = table.shape
     while(True):    
         x = table[1:a,0]
+        x = round6(x)
         if np.all((x>=0)):
             x_opt = np.zeros(n)
 
@@ -129,6 +133,7 @@ def dualsimplex(table,n,basis_list):
         l += 1 #In original table
 
         v = table[l,1:b]
+        v = round6(v)
         if np.all((v>=0)):
             flag = 1
             return None, 1
