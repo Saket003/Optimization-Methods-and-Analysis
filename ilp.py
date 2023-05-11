@@ -1,5 +1,5 @@
 from helpers import takeinput, choice, addcondition, frac, round6, convert
-from simplex_tableau import tableau, dualsimplex
+from simplex_tableau import tableau, dualsimplex, simplex_mod
 import math
 import numpy as np
 import fractions
@@ -11,6 +11,7 @@ def gomory(filename):
 
     #TODO Verify #Check initial table wrongish?
     x_opt,table,flag,basis_list = tableau(A,b,c)
+    x_opt, flag = simplex_mod(table,n,basis_list)
     if(flag == 1):
         return None
     
@@ -47,3 +48,4 @@ def gomory(filename):
 # print(gomory("TC\TC2.txt")) #[0,2] - #TODO getting [0,1]
 # print(gomory("TC\TC3.txt")) #[0,2,0,0]
 # print(gomory("TC\TC4.txt")) #[4,4]
+print(gomory("TC\TC5.txt")) #[4,4]
