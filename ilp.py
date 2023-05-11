@@ -42,9 +42,9 @@ def gomory(filename):
         #    table[i,:] = round6(table[i,:])
 
 
-print(gomory("TC\TC1.txt"))  # [1,1]
-print(gomory("TC\TC2.txt"))  # [0,2] - #TODO getting [0,1]
-print(gomory("TC\TC3.txt"))  # [0,2,0,0]
-print(gomory("TC\TC4.txt"))  # [4,4]
-print(gomory("TC\TC5.txt"))  # [5,0]
+# print(gomory("TC\TC1.txt"))  # [1,1]
+# print(gomory("TC\TC2.txt"))  # [0,2] - #TODO getting [0,1]
+# print(gomory("TC\TC3.txt"))  # [0,2,0,0]
+# print(gomory("TC\TC4.txt"))  # [4,4]
+# print(gomory("TC\TC5.txt"))  # [5,0]
 # print(gomory("TC\TC6.txt")) #[]
